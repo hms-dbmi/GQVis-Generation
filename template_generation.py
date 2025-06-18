@@ -1,6 +1,7 @@
 import pandas as pd
 from udi_grammar_py import Chart, Op, rolling
 from enum import Enum
+import json
 
 class QueryType(Enum):
     QUESTION = "question"
@@ -9,6 +10,7 @@ class QueryType(Enum):
 class ChartType(Enum):
     SCATTERPLOT = "scatterplot"
     BARCHART = "barchart"
+    POINT = "point"
     GROUPED_BAR = "stacked_bar"
     STACKED_BAR = "stacked_bar"
     NORMALIZED_BAR = "stacked_bar"
@@ -26,7 +28,11 @@ class ChartType(Enum):
 
 
 def add_row(df, query_template, spec, constraints, query_type: QueryType, chart_type: ChartType):
-    spec_key_count = get_total_key_count(spec.to_dict())
+    if isinstance(spec, Chart): #is the spec a chart? 
+        spec_dict = spec.to_dict()  #convert to dict -> JSON serializable
+    else:
+        spec_dict = spec #dont convert to dict, dont need to
+    spec_key_count = len(spec_dict)  
     if spec_key_count <= 12:
         complexity = "simple"
     elif spec_key_count <= 24:
@@ -35,10 +41,11 @@ def add_row(df, query_template, spec, constraints, query_type: QueryType, chart_
         complexity = "complex"
     else:
         complexity = "extra complex"
+
     df.loc[len(df)] = {
         "query_template": query_template,
         "constraints": constraints,
-        "spec_template": spec.to_json(),
+        "spec_template": json.dumps(spec_dict),
         "query_type": query_type.value,
         "creation_method": "template",
         "chart_type": chart_type.value,
@@ -1509,9 +1516,54 @@ def generate():
         chart_type=ChartType.TABLE,
     )
 
+
+    df = add_row(
+        df,
+        query_template="Where are <F:p.q> in <S>?",
+        spec=(
+            {
+                'mark':'point',
+                'x':'position:G',
+                #'y':'peak:Q',# is this F
+                'y':'<F>',
+                'data_source':'<F.url>' # refer to the data for the feature
+            }
+        ),
+        constraints=[
+            # show a max of 1000 points
+            '<F:p.q>.c < 1000',
+        ],
+        query_type=QueryType.QUESTION,
+        chart_type=ChartType.POINT,
+    )
+
+
+
+    df = add_row(
+        df,
+        # can represent with pipe character1
+        query_template="Is the <F:p.q|s.q> at <L> a peak or a valley?",
+        spec=(
+            { 
+             'mark':'line',
+             'x':'position:G',
+             'y':'<F>',
+             'data_source':'<F.url>'
+            }
+        ),
+        constraints=[
+            # location
+            'F.c > 20' #have at least 20 marks to make a line 
+            
+        ],
+        query_type=QueryType.QUESTION,
+        chart_type=ChartType.LINE,
+    )
+
     return df
+
 
 
 if __name__ == "__main__":
     df = generate()
-    print(df.head())
+    print(df.loc[64])
