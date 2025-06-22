@@ -2,74 +2,102 @@ from typing import List, Dict, Union
 import pandas as pd
 import re
 from constraint import *
+import json
 
 # from parsimonious.grammar import Grammar
 from pprint import pprint
-
 
 def expand(df, dataset_schemas):
     expanded_rows = []
     for _, row in df.iterrows():
         for schema in dataset_schemas:
-            schema_name = schema["udi:name"]
-            base_path = schema["udi:path"]
-            schema_def = schema["resources"]
-            # flatten schema_def
-            schema_flattened = []
-            for file in schema_def:
-                entity = file["name"]
-                row_count = file["udi:row_count"]
-                column_count = file["udi:column_count"]
-                file_schema = file["schema"]
-                foreignKeys = file_schema.get("foreignKeys", [])
-                file_path = file["path"]
-                url = base_path + file_path
-                for col in file_schema["fields"]:
+            schema_name = schema["name"] #sample id instead of name? 
+            schema_id = schema["udi:sample-id"] #point to sample id path
+            sources = schema["sources"]  #call to sources [ path ], flatten sources?
+            
+            for file in sources:
+                sources_name= file["name"]
+                sources_title= file["title"]
+                sources_path = file["path"]
+            
+            schema_assembly = schema["udi:assembly"]
+            schema_cancer = schema["udi:cancer-type"]
+            schema_genes = schema["udi:genes"]
+            
+            gene_list = []
+            for elem in schema_genes:
+                gene_list.append({'name':elem["name"],'chr':elem["chr"], 'pos':elem["pos"]})
+
+            resource_def = schema["resources"]
+            #sources_flattened = [] 
+
+            # flatten schema_deft
+            resource_flattened = []
+            for file in resource_def:
+                sample = file["name"]
+                url = file["path"]
+                
+                resources_schema = file["schema"]
+                foreignKeys = resources_schema.get("foreignKeys", [])
+                #url = base_path + file_path
+                for col in resources_schema["fields"]:
                     expanded_col = col.copy()
                     expanded_col.update(
                         {
-                            "entity": entity,
-                            "row_count": row_count,
-                            "column_count": column_count,
+                            "sample": sample,
                             "url": url,
-                            "foreignKeys": foreignKeys
+                            "foreignKeys":foreignKeys
                         }
                     )
-                    schema_flattened.append(expanded_col)
-            field_options = schema_flattened
+                    resource_flattened.append(expanded_col)
+                
+                #primary_key = resources_schema["primary_key"] 
+                #file_format = file["format"]
             # unique_entities = set([x["entity"] for x in schema_flattened])
-            row_count_lookup = {x["entity"]: x["row_count"] for x in schema_flattened}
-            url_lookup = {x["entity"]: x["url"] for x in schema_flattened}
-            er_lookup = {x["entity"]: x["foreignKeys"] for x in schema_flattened}
-            unique_entities = url_lookup.keys()
+            #row_count_lookup = {x["sample"]: x["name"] for x in resource_flattened}
+            url_lookup = {x["sample"]: x["url"] for x in resource_flattened}
+            er_lookup = {x["sample"]: x["foreignKeys"] for x in resource_flattened}
+            unique_samples = url_lookup.keys()
 
-            entity_options = [
+            sample_options = [
                 {
-                    "entity": entity,
-                    "url": url_lookup[entity],
-                    "udi:cardinality": row_count_lookup[entity],
-                    "foreignKeys":  er_lookup[entity],
-                    "fields": [ x["name"] for x in schema_flattened if x["entity"] == entity]
+                    "sample": sample,
+                    "url": url_lookup[sample], 
+                    # "udi:cardinality": row_count_lookup[sample],
+                    "foreignKeys":  er_lookup[sample],
+                    "fields": [ x["name"] for x in resource_flattened if x["sample"] == sample],
+                    "assembly":schema_assembly
                 }
-                for entity in unique_entities
+                for sample in unique_samples
             ]
-            new_rows = expand_template(row, entity_options, field_options)
+            
+            location_options = [
+                {
+                    'genes':gene_list,
+                    'positions': [gene_info['pos'] for gene_info in gene_list],
+                    'chromosomes': [gene_info['chr'] for gene_info in gene_list],
+                }
+            ]
+            
+            field_options=resource_flattened
+
+            new_rows = expand_template(row, sample_options, field_options, location_options)
             for new_row in new_rows:
                 new_row["dataset_schema"] = schema_name
             expanded_rows.extend(new_rows)
     expanded_df = pd.DataFrame(expanded_rows)
     return expanded_df
 
-
-def expand_template(row, entity_options, field_options):
+def expand_template(row, sample_options, field_options, location_options):
     extract = extract_tags(row["query_template"])
     tags = extract["tags"]
-    entities = extract["entities"]
+    samples = extract["samples"]
+    locations = extract["locations"]
     fields = extract["fields"]
     constraints = expand_constraints(row["constraints"], tags)
     # print("⭐ expanded constraints ⭐")
     # print(row)
-    s = constraint_solver(entities, fields, constraints, entity_options, field_options)
+    s = constraint_solver(samples, fields, locations, constraints, sample_options, field_options, location_options)
 
     return expand_solutions(row, tags, s)
 
@@ -100,10 +128,10 @@ def resolve_query_template(query_template, tags, solution):
     query_base = query_template
     for tag in tags:
         if tag["field"]:
-            k = tag["entity"] + "_" + tag["field"]
+            k = tag["sample"] + "_" + tag["field"] 
             resolved = solution[k]["name"]
         else:
-            resolved = solution[tag["entity"]]["entity"]
+            resolved = solution[tag["sample"]]["sample"] #redefine entity as sample
         query_base = query_base.replace(f"<{tag['original']}>", resolved, 1)
     return query_base
 
@@ -119,11 +147,11 @@ def resolve_spec_template(spec_template, tags, solution):
         parts = content.split(".")
         if len(parts) == 1:
             content = parts[0]
-            if content.startswith("E"):
-                entity = content
-                resolved = solution[entity]["entity"]
+            if content.startswith("S"):
+                sample = content
+                resolved = solution[sample]["sample"]
             else:
-                resolved = solution["E_" + parts[0]]["name"]
+                resolved = solution["S_" + parts[0]]["name"]
         elif len(parts) == 2:
             left, right = parts
             if right == "url":
@@ -131,23 +159,23 @@ def resolve_spec_template(spec_template, tags, solution):
             else:
                 resolved = solution[left + "_" + right]["name"]
         elif len(parts) == 5:
-            E1, r, E2, id, source = parts
-            if E1[0] != "E" or E2[0] != "E" or r != "r" or id != "id" or source not in ["from", "to"]:
+            S1, r, S2, id, source = parts
+            if S1[0] != "S" or S2[0] != "S" or r != "r" or id != "id" or source not in ["from", "to"]:
                 raise ValueError(
                     f"Invalid match: {match}. Unexpected formatting of spec template tag."
                 )
-            E2_name = solution[E2]["entity"]
+            S2_name = solution[S2]["source"]
             # resolved = solution[E1]["foreignKeys"][E2_name]["id"][source]
             # What needs to happen here, is it should loop over foreign keys to find if reference.resource matches E2_name
             # and then if source is 'from' return fields else return reference.fields
-            foreignKeys = solution[E1]["foreignKeys"]
+            foreignKeys = solution[S1]["foreignKeys"]
             matchedKey = next(
-                (fk for fk in foreignKeys if fk["reference"]["resource"] == E2_name),
+                (fk for fk in foreignKeys if fk["reference"]["resource"] == S2_name),
                 None,
             )
             if matchedKey is None:
                 raise ValueError(
-                    f"Invalid match: {match}. Could not find foreign key for {E1} to {E2}"
+                    f"Invalid match: {match}. Could not find foreign key for {S1} to {S2}"
                 )
             if source == "from":
                 resolved = matchedKey["fields"]
@@ -193,22 +221,33 @@ def extract_tags(text: str) -> List[Dict[str, Union[str, List[str]]]]:
             {"original": "E1.F1:n", "entity": "E1", "field": "F1", "field_type": ["n"]},
             {"original": "E2.F2:o|n", "entity": "E2", "field": "F2", "field_type": ["o", "n"]}
         ]
+        
     """
     pattern = r"<([^>]+)>"
     matches = re.findall(pattern, text)
 
     tags = []
+    # match: each time the pattern appears in the text
+    # <F.p.q> or <F.p>
+    # <F.g>
     for match in matches:
         parts = match.split(".")
-        entity, field, field_type = None, None, None
+        sample, field, location, field_type = None, None, None, None
         if len(parts) == 1:
             first = parts[0]
-            if first.startswith("E"):
-                entity = first
+            if first.startswith("S"):
+                sample = first
+            elif first.startswith("L"):
+                location = first
             else:
-                field = first
+                field=first
         elif len(parts) == 2:
-            entity, field = parts
+            first, second = parts
+            sample=first
+            if first.startswith("L"):
+                location = second
+            else:
+                field=second
         else:
             raise ValueError(
                 f"Invalid match: {match}. There should only be a single '.'"
@@ -216,32 +255,53 @@ def extract_tags(text: str) -> List[Dict[str, Union[str, List[str]]]]:
 
         if field:
             field_parts = field.split(":")
+            allowed_fields = None
             if len(field_parts) == 2:
-                field, field_type = field_parts
-                field_type = [
-                    {"n": "nominal", "o": "ordinal", "q": "quantitative"}[t]
-                    for t in field_type.split("|")
-                ]
+                field, field_type = field_parts                
+                try: 
+                    allowed_fields = [
+                        {"n": "nominal", 
+                        "o": "ordinal", 
+                        "q": "quantitative", 
+                        "g": "genomic",
+                        "g&q": "quantitative genomic",
+                        "g&c": "categorical genomic",
+                        "p": "point",
+                        "p&n": "nominal point",
+                        "p&o":"ordinal point",
+                        "p&q": "quantiative point",
+                        "s": "segment",
+                        "s&n": "nominal segment",
+                        "s&o":"ordinal segment",
+                        "s&q": "quantiative segment",
+                        "c": "connective"}[t]
+                        for t in field_type.split("|")
+                    ]
+                except KeyError as e:
+                    raise ValueError(f"Invalid field type abbreviation: {e}")
             else:
-                raise ValueError(
-                    f"Invalid match: {match}. Field type must be specified"
-                )
-
+                    allowed_fields = None
+        else:
+            allowed_fields = None
         tags.append(
             {
-                "entity": entity,
+                "sample": sample,
                 "field": field,
-                "allowed_fields": field_type,
+                "location": location,
+                "allowed_fields": allowed_fields,
                 "original": match,
             }
         )
     infer_entity(tags)
-    entities = set([tag["entity"] for tag in tags])
+    samples = set([tag["sample"] for tag in tags])
     # fields = set([tag["field"] for tag in tags if tag["field"]])
     fields = set(
-        [str(tag["entity"]) + "_" + tag["field"] for tag in tags if tag["field"]]
+        [str(tag["sample"]) + "_" + tag["field"] for tag in tags if tag["field"]]
     )
-    return {"tags": tags, "entities": list(entities), "fields": list(fields)}
+    locations = set(
+        [str(tag["sample"]) + "_" + tag["location"] for tag in tags if tag["location"]]
+    )
+    return {"tags": tags, "samples": list(samples), "locations": list(locations), "fields": list(fields)}
 
 
 def infer_entity(
@@ -251,13 +311,13 @@ def infer_entity(
     Infer the based on the other entities. If none is provided, default to E.
     If there is an empty entity and multiple other entities defined, thwrow an error.
     """
-    defined_entities = [tag["entity"] for tag in tags if tag["entity"]]
+    defined_entities = [tag["sample"] for tag in tags if tag["sample"]]
     unique_entities = set(defined_entities)
 
-    if len(unique_entities) > 1 and any(not tag["entity"] for tag in tags):
-        raise ValueError("Multiple entities defined, cannot infer empty entity.")
-    for tag in [x for x in tags if not x["entity"]]:
-        tag["entity"] = "E"
+    if len(unique_entities) > 1 and any(not tag["sample"] for tag in tags):
+        raise ValueError("Multiple entities defined, cannot infer empty sample.")
+    for tag in [x for x in tags if not x["sample"]]:
+        tag["sample"] = "S"
     return tags
 
 
@@ -274,6 +334,7 @@ def expand_constraints(
     for constraint in constraints:
         # E1.r.E2.c.to → E1.r.E2['cardinality'].to
         resolved = constraint.replace(".c", "['udi:cardinality']")
+        
         # E1.r.E2['cardinality'].to → E1.r[E2['entity']]['cardinality'].to
         resolved, isErConstraint = resolve_related_entity(resolved)
         if isErConstraint:
@@ -297,15 +358,15 @@ def expand_constraints(
     # Turn field types into constraints
     expanded_constraints.extend(
         [
-            f"{tag['entity']}_{tag['field']}['udi:data_type'] in {tag['allowed_fields']}"
+            f"{tag['sample']}_{tag['field']}['udi:data_type'] in {tag['allowed_fields']}"
             for tag in tags
-            if tag["field"]
+            if tag["field"] and isinstance(tag.get("allowed_fields"), list)
         ]
     )
 
     # Ensure fields are not repeated
     unique_fields = set(
-        [str(tag["entity"]) + "_" + tag["field"] for tag in tags if tag["field"]]
+        [str(tag["sample"]) + "_" + tag["field"] for tag in tags if tag["field"]]
     )
     # if len(unique_fields) > 1:
     #     for field in unique_fields:
@@ -324,11 +385,11 @@ def expand_constraints(
             )
 
     # ensure that entities are not repeated
-    unique_entities = set([tag["entity"] for tag in tags])
+    unique_entities = set([tag["sample"] for tag in tags])
     if len(unique_entities) > 1:
         for entity in unique_entities:
             other_entities = unique_entities - {entity}
-            e_str = "['entity']"
+            e_str = "['sample']"
             other_entities_string = (
                 "[" + ",".join([str(x) + e_str for x in other_entities]) + "]"
             )
@@ -341,6 +402,14 @@ def expand_constraints(
         entity = field.split("_")[0]
         expanded_constraints.append(f"{field}['entity'] == {entity}['entity']")
 
+    for tag in tags:
+        print(f"Tag: {tag}")
+        if tag["field"] and isinstance(tag.get("allowed_fields"), list):
+            constraint = f"{tag['sample']}_{tag['field']}['udi:data_type'] in {tag['allowed_fields']}"
+            print("Generated constraint:", constraint)
+            expanded_constraints.append(constraint)
+        else:
+            print(f"Invalid allowed_fields for tag: {tag}")
     return expanded_constraints
 
 
@@ -353,10 +422,10 @@ def create_relationship_existence_constraint(constraint: str) -> str:
     parts = constraint.split('.')
     if len(parts) < 3:
         raise ValueError("Unexpected relationship constraint length:", constraint)
-    E1, r, E2 = parts[:3]
-    if (E1[0] != 'E') or (E2[0] != 'E') or (r != 'r'):
+    S1, r, S2 = parts[:3]
+    if (S1[0] != 'S') or (S2[0] != 'S') or (r != 'r'):
         raise ValueError("Unexpected relationship constraint:", constraint)
-    existence_constraint =  f"{E2}['entity'] in [fk['reference']['resource'] for fk in {E1}['foreignKeys']]"
+    existence_constraint =  f"{S2}['entity'] in [fk['reference']['resource'] for fk in {S1}['foreignKeys']]"
     return existence_constraint
 
 def resolve_related_entity(text): 
@@ -365,33 +434,36 @@ def resolve_related_entity(text):
     # other things (.c, .to) well be resolved elsewhere
     # assumes that the only time .E exists is when finding a relationship
     foundConstraint = False
-    pattern = r'\.E[0-9]*'
+    pattern = r'\.S[0-9]*'
     while re.search(pattern, text):
         foundConstraint = True
         match = re.search(pattern, text).group(0)
-        resolved = f"[{match.lstrip('.')}['entity']]"
+        resolved = f"[{match.lstrip('.')}['sample']]"
         text = text.replace(match, resolved)
     if foundConstraint:
         pattern = r'E[0-9]*\.r'
         while re.search(pattern, text):
             match = re.search(pattern, text).group(0)
-            E_number = match.split(".")[0].lstrip("E")
-            resolved = "{fk['reference']['resource']:fk for fk in E" + str(E_number) + "['foreignKeys']}"
+            S_number = match.split(".")[0].lstrip("S")
+            resolved = "{fk['reference']['resource']:fk for fk in S" + str(S_number) + "['foreignKeys']}"
             text = text.replace(match, resolved)
     return text, foundConstraint
 
 def add_default_entity(text):
-    # Use regex to match "F" that is not preceded by "_" and replace it with "E_F"
-    modified_text = re.sub(r'(?<!_)F', r'E_F', text)
+    # Use regex to match "F" that is not preceded by "_" and replace it with "S_F"
+    modified_text = re.sub(r'(?<!_)F', r'S_F', text)
+    # replace L that does not have _ to replace with S_L
+    modified_text = re.sub(r'(?<!_)L', r'S_L', modified_text)
     return modified_text
 
-
 def constraint_solver(
-    entities: List[str],
+    samples: List[str],
     fields: List[str],
-    constraints: List[str],
-    entity_options: List[Dict[str, Union[str, int]]],
+    locations: List[str],
+    expanded_constraints: List[str],
+    sample_options: List[Dict[str, Union[str, int]]],
     field_options: List[Dict[str, Union[str, int]]],
+    location_options:  List[Dict[str, Union[str, int]]]
 ) -> List[Dict[str, str]]:
     problem = Problem()
     # print("⭐ constraints ⭐")
@@ -402,15 +474,20 @@ def constraint_solver(
     # print("⭐ fields ⭐")
     # pprint(fields)
     # pprint(field_options)
+    
     problem.addVariables(fields, field_options)
-    problem.addVariables(entities, entity_options)
-    for constraint in constraints:
-        problem.addConstraint(constraint)
-    s = problem.getSolutions()
-    # pprint("⭐ solutions ⭐")
-    # pprint(s)
-    return s
+    problem.addVariables(samples, sample_options)
 
+    problem.addVariables(locations, location_options)
+    for constraint in expanded_constraints:
+        try:
+            print("Adding constraint:", constraint)
+            problem.addConstraint(constraint)
+        except SyntaxError as e:
+            print(f"Invalid constraint: {constraint}")
+            raise e
+    s = problem.getSolutions()
+    # pn s
 
 def test_constraint_solver():
     problem = Problem()
@@ -430,6 +507,7 @@ def test_constraint_solver():
             "cardinality": 23,
         },
     ]
+
     entities = [
         {"entity": "donors", "data_type": None, "name": None, "cardinality": 200},
         {"entity": "samples", "data_type": None, "name": None, "cardinality": 200},
@@ -454,56 +532,56 @@ if __name__ == "__main__":
     # test_grammar_parser()
     # test_constraint_solver()
     # def expand_template(row, entity_options, field_options):
-    expand_template(
-        row={
-            "constraints": [],
-            "query_template": "How many <E> are there <F:Q>?",
-            "spec_template": "{ source: '<E>', '<E.url> rep: <F>'}",
-        },
-        entity_options=[
-            {
-                "url": "./data/fake_sample.csv",
-                "entity": "fake_sample",
-                "name": None,
-                "data_type": None,
-                "cardinality": None,
-            },
-            {
-                "url": "./data/fake_donor.csv",
-                "entity": "fake_donor",
-                "name": None,
-                "data_type": None,
-                "cardinality": None,
-            },
-            {
-                "url": "./data/fake_file.csv",
-                "entity": "fake_file",
-                "name": None,
-                "data_type": None,
-                "cardinality": None,
-            },
-        ],
-        field_options=[
-            {
-                "entity": "fake_sample",
-                "name": "organ",
-                "data_type": "nominal",
-                "cardinality": 6,
-            },
-            {
-                "entity": "fake_donor",
-                "name": "weight",
-                "data_type": "quantitative",
-                "cardinality": 27,
-            },
-            {
-                "entity": "fake_donor",
-                "name": "height",
-                "data_type": "quantitative",
-                "cardinality": 27,
-            },
-        ],
-    )
+    # expand_template(
+    #     row={
+    #         "constraints": [],
+    #         "query_template": "How many <E> are there <F:Q>?",
+    #         "spec_template": "{ source: '<E>', '<E.url> rep: <F>'}",
+    #     },
+    #     entity_options=[
+    #         {
+    #             "url": "./data/fake_sample.csv",
+    #             "entity": "fake_sample",
+    #             "name": None,
+    #             "data_type": None,
+    #             "cardinality": None,
+    #         },
+    #         {
+    #             "url": "./data/fake_donor.csv",
+    #             "entity": "fake_donor",
+    #             "name": None,
+    #             "data_type": None,
+    #             "cardinality": None,
+    #         },
+    #         {
+    #             "url": "./data/fake_file.csv",
+    #             "entity": "fake_file",
+    #             "name": None,
+    #             "data_type": None,
+    #             "cardinality": None,
+    #         },
+    #     ],
+    #     field_options=[
+    #         {
+    #             "entity": "fake_sample",
+    #             "name": "organ",
+    #             "data_type": "nominal",
+    #             "cardinality": 6,
+    #         },
+    #         {
+    #             "entity": "fake_donor",
+    #             "name": "weight",
+    #             "data_type": "quantitative",
+    #             "cardinality": 27,
+    #         },
+    #         {
+    #             "entity": "fake_donor",
+    #             "name": "height",
+    #             "data_type": "quantitative",
+    #             "cardinality": 27,
+    #         },
+    #     ],
+    # )
 
     # # Example usage
     # data = {
@@ -518,6 +596,12 @@ if __name__ == "__main__":
     #         "City": ["Population", "Area"]
     #     }
     # ]
+    
+    with open('example_schema.json', 'r') as fp:
+        schema=json.load(fp)
+    if isinstance(schema, dict):
+        schema = [schema]
+    df=pd.read_csv('/Users/arthe/HMS/forkDQVis-Generation/DQVis-Generation/dataframe_for_presentation.csv')
 
-    # expanded_df = expand(df, dataset_schemas)
-    # print(expanded_df)
+    expanded_df = expand(df, schema)
+    print(expanded_df)
