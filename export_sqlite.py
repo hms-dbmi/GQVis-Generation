@@ -1,4 +1,5 @@
 import random
+import csv
 import sqlite3
 import json
 import pandas as pd
@@ -23,13 +24,14 @@ def export(db_path, df, sample=False):
         "spec_template",
         "query_type",
         "creation_method",
+        "chart_type",
+        "chart_complexity",
         "query_base",
         "spec",
         "solution",
         "dataset_schema",
         "query",
-        "chart_type",
-        "chart_complexity",
+        
     ]
 
     number_columns = [
@@ -107,3 +109,8 @@ def export(db_path, df, sample=False):
 
     conn.commit()
     conn.close()
+
+db_path = ("/Users/arthe/HMS/DQVis-Generation/database.sqlite")
+df = pd.read_csv("/Users/arthe/HMS/DQVis-Generation/basic-expanded-template.csv")
+print(df.columns)
+export(db_path, df)
