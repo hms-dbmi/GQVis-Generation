@@ -257,7 +257,19 @@ def paraphrase_query(cache_lock, llm, key, query: str, dataset_schema: str, cach
         except Exception as e:
             print(f"Error parsing GPT output: {e}")
 
-    response = ParaphrasedSentencesList(sentences=sentences)
+    #filter to only the 10 expected pairs, first occurrence only
+    expected_pairs = [(1,1), (1,5), (3,1), (3,5), (5,1), (5,5), (2,3), (3,2), (4,4), (2,5)]
+    filtered_sentences = []
+    seen_pairs = set()
+    for s in sentences:
+        pair = (s.formality, s.expertise)
+        if pair in expected_pairs and pair not in seen_pairs:
+            filtered_sentences.append(s)
+            seen_pairs.add(pair)
+        if len(filtered_sentences) == 10:
+            break
+
+    response = ParaphrasedSentencesList(sentences=filtered_sentences)
     with cache_lock:
         try:
             cache[key] = response
