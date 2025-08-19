@@ -1,23 +1,38 @@
 import time
 import pickle
 import sys
+import re
 from typing import Dict, Optional, Tuple
 import pandas as pd
 import os
 from langchain.chat_models import init_chat_model
-from langchain_openai import AzureChatOpenAI
+from langchain_openai import OpenAI
 from langchain_core.prompts import PromptTemplate
 from pydantic import BaseModel, Field
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
 import json
-
 from dotenv import load_dotenv
 from rich import print
 load_dotenv()
 
 CACHE_FILE = "./datasets/paraphrase_cache.pkl"
 
+def load_schema(schema_files):
+    schema_list = []
+    for file in schema_files:
+        with open(file, "r") as f:
+            loaded_schemas = json.load(f)
+            # Flatten if loaded_schemas is a list of lists
+            if isinstance(loaded_schemas, list):
+                for item in loaded_schemas:
+                    if isinstance(item, list):
+                        schema_list.extend(item)
+                    else:
+                        schema_list.append(item)
+            else:
+                schema_list.append(loaded_schemas)
+    return schema_list
 
 def paraphrase(df, schema_list, only_cached: Optional[bool] = False) -> pd.DataFrame:
     '''
@@ -40,9 +55,7 @@ def paraphrase(df, schema_list, only_cached: Optional[bool] = False) -> pd.DataF
             resource_schema = resource.get("schema", {})
             if not isinstance(resource_schema, dict):
                 raise ValueError(f"Expected a dict for schema, but got {type(resource_schema)}")
-            fields = resource_schema.get("fields", [])
-            for field in fields:
-                field.pop("udi:overlapping_fields")
+            
 
     cache = get_cache()
     index = 0
@@ -59,10 +72,10 @@ def paraphrase(df, schema_list, only_cached: Optional[bool] = False) -> pd.DataF
         nonlocal interval_index, completed_rows
         query_base = row["query_base"]
         dataset_name = row["dataset_schema"]
-        dataset_schema = next((schema for schema in schema_list if schema['udi:name'] == dataset_name), None)
+        dataset_schema = next((schema for schema in schema_list if schema.get('udi:name', schema.get('name')) == dataset_name), None)
         # convert nexted dict into json string
         if dataset_schema is not None:
-            dataset_schema = json.dumps(dataset_schema, indent=0)
+            dataset_schema = dataset_schema.get("name", "")
         else:
             raise ValueError(f"Dataset schema '{dataset_name}' not found in schema list.")
         try:
@@ -171,49 +184,47 @@ class ParaphrasedSentencesList(BaseModel):
     )
 
 def construct_prompt_template():
-    template = '''
+    return '''
 You are a paraphrasing assistant. Your task is to rewrite a given sentence with various styles of language usage.
-The sentence will either be a question about data, or request to construct a data visualization.
+The sentence will either be a question about genomics data, or request to construct a genomics data visualization. You must produce different paraphrased versions of the sentence.
 
-The input sentence will include entity names and fields names from the data.
-The dataset schema will also be provided to you to enable better paraphrasing of the field and entity names.
-More technical language may use the exact field names, while more colloquial language may use more general terms, synonyms, and
-will likely not use the exact field names.
-e.g. "What is the value of the age_value field?" vs "How old is the person?".
+The input sentence will include entity, sample, and location from the data.
+The dataset schema will also be provided to you to enable better paraphrasing these names.
+More technical language may use the exact field names, while more colloquial language may use more general terms, synonyms, and will likely not use the exact field names. All questions should be answered by a genomics data visualization in 2D.
+
+E.g, Where do structural variants (SVs) fall in relation to the FBXW7 gene?
+
+Each paraphrase corresponds to a unique pair of:
+- Score-A (formality): 1 (very colloquial) to 5 (very formal)
+- Score-B (expertise): 1 (non-technical) to 5 (very technical)
+
+Use this format:
+Score-A <A>, Score-B <B>: <Paraphrased sentence>
+
+Input:
+Sentence: {sentence}
 Dataset schema: {dataset_schema}
 
-Score-A of 1 indicates a higher tendency to use {dim1_1} language and a Score-A of 5 indicates a higher tendency to use {dim1_5} language.
-Score-B of 1 indicates a higher tendency to use {dim2_1} language and a Score-B of 5 indicates a higher tendency to use {dim2_5} language.
-Rewrite the following sentence as if it were spoken by a person with a given score for language usage.
-
-Sentence: {sentence}
-
-##
+Output:
+(Write 10 paraphrased sentences, one for each of the following pairs: (1,1), (1,5), (3,1), (3,5), (5,1), (5,5), (2,3), (3,2), (4,4), (2,5), using the format above.)
 '''
-    # constuct all possible score combinations
-    for i in range(1, 6):
-        for j in range(1, 6):
-            template += f'Score-A {i}, Score-B {j}:\n'
-    return template
-
 
 def init_llm():
-    # llm = init_chat_model("gpt-4o-mini", model_provider="openai")
-    llm = AzureChatOpenAI(
-        azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
-        openai_api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
-        deployment_name="gpt-4o",
-        # deployment_name="o1",
-        api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+
+    llm = OpenAI(
+        api_key = os.environ.get("OPENAI_API_KEY"),
+        organization=os.environ.get("OPENAI_ORG_ID"),
+        model="gpt-4o"
+        #model_kwargs= {"project": os.environ.get("OPENAI_PROJECT_ID")}
     )
 
-    structured_llm = llm.with_structured_output(ParaphrasedSentencesList)
-
     prompt_template = PromptTemplate.from_template(construct_prompt_template())
-    llm_chained = prompt_template | structured_llm
+
+    llm_chained = prompt_template | llm
     return llm_chained
 
-def paraphrase_query(cache_lock, llm, key, query: str, dataset_schema: str, cache: Dict[str, ParaphrasedSentencesList] = {}, only_cached = False) -> Tuple[ParaphrasedSentencesList, bool]:
+
+def paraphrase_query(cache_lock, llm, key, query: str, dataset_schema: str, cache: Dict[str, 'ParaphrasedSentencesList'] = {}, only_cached = False) -> Tuple['ParaphrasedSentencesList', bool]:
     if key in cache:
         return cache[key], True
     if only_cached:
@@ -226,18 +237,62 @@ def paraphrase_query(cache_lock, llm, key, query: str, dataset_schema: str, cach
             sentences=[not_paraphrased]
         )
         return response, True
-    
-    response = llm.invoke({
-        "sentence": query,
-        "dataset_schema": dataset_schema,
-        "dim1_1": "Colloquial",
-        "dim1_5": "Standard",
-        "dim2_1": "Non-technical",
-        "dim2_5": "Technical"
-    })
+
+    # repeat the paraphrasing 10 times for each input
+    sentences = []
+    for _ in range(10):
+        output = llm.invoke({
+            "sentence": query,
+            "dataset_schema": dataset_schema,
+            "dim1_1": "Colloquial",
+            "dim1_5": "Standard",
+            "dim2_1": "Non-technical",
+            "dim2_5": "Technical"
+        })
+        try:
+            output_str = str(output)
+            for line in output_str.split("\n"):
+                match = re.match(r"Score-A\s*(\d),\s*Score-B\s*(\d):\s*(.+)", line.strip())
+                if match:
+                    a_score, b_score, sentence = match.groups()
+                    sentences.append(ParaphrasedSentence(
+                        paraphrasedSentence=sentence.strip(),
+                        formality=int(a_score),
+                        expertise=int(b_score)
+                    ))
+        except Exception as e:
+            print(f"Error parsing GPT output: {e}")
+
+    #filter to only the 10 expected pairs, first occurrence only
+    expected_pairs = [(1,1), (1,5), (3,1), (3,5), (5,1), (5,5), (2,3), (3,2), (4,4), (2,5)]
+    filtered_sentences = []
+    seen_pairs = set()
+    for s in sentences:
+        pair = (s.formality, s.expertise)
+        if pair in expected_pairs and pair not in seen_pairs:
+            filtered_sentences.append(s)
+            seen_pairs.add(pair)
+        if len(filtered_sentences) == 10:
+            break
+
+    response = ParaphrasedSentencesList(sentences=filtered_sentences)
     with cache_lock:
         try:
             cache[key] = response
         except Exception as e:
             print(f"Error updating cache object: {e}")
     return response, False
+
+
+if __name__ == "__main__":
+    schema_files = ["all-schema.json"]  
+    schema_list = load_schema(schema_files)
+    for i, schema in enumerate(schema_list):
+        if not isinstance(schema, dict):
+            raise ValueError(f"Schema at index {i} is not a dictionary: {type(schema)}")
+
+    df = pd.read_csv("test.csv")  
+    result_df = paraphrase(df, schema_list, only_cached=False)
+
+    result_df.to_csv("testresult.csv", index=False)
+    print(result_df.head())

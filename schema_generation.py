@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import json
 import frictionless
+from frictionless import Schema
 
 # import pyarrow.csv as pv_csv
 # import pyarrow as pa
@@ -19,7 +20,6 @@ Notes:
     3. column schema differs by type of file --> use varying get_column_schema methods
     
     4. not a folder-based system!
-
 '''
 
 def process_link(url, config=False):
@@ -42,10 +42,8 @@ def get_samples(url):
         samples=[]
         
         for sample in data:
+            schema = Schema.describe()
             
-
-    
-
 # extract column names and data types
 def get_column_schema(df):
     schema = []
