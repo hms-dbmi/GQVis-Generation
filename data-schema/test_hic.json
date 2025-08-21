@@ -1,0 +1,1242 @@
+[
+  {
+    "name": "ATAC-seq, HEK293 (no treatment control)",
+    "description": "ATAC-seq on HEK293 cells - no treatment control",
+    "udi:sample-id": "4DNES694VKB2",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - no treatment control",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNES694VKB2/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=96015c0b-64d1-4bcb-973f-733063b03c69",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=ec3286ef-27ed-4b17-a62e-b7d11fa25420",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=fe50f4b7-c5cf-4fa6-8413-8284ef7754ff",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (photocleavable mgRNA - 4 h post light)",
+    "description": "ATAC-seq on HEK293 cells - 4h after light Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+    "udi:sample-id": "4DNES8M2U3VI",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - 4h after light Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNES8M2U3VI/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (photocleavable mgRNA - 1 h post light)",
+    "description": "ATAC-seq on HEK293 cells - 1h after light Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+    "udi:sample-id": "4DNESRIVHLUJ",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - 1h after light Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESRIVHLUJ/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (photocleavable mgRNA - no light control)",
+    "description": "ATAC-seq on HEK293 cells - no-light control Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+    "udi:sample-id": "4DNESW8HXWB8",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - no-light control Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESW8HXWB8/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (light activated caged mgRNA - 30 minute post light)",
+    "description": "ATAC-seq on HEK293 cells - 30min after light Cas9-AluGG cgRNA (vfCRISPR)",
+    "udi:sample-id": "4DNES1ZCV8UF",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - 30min after light Cas9-AluGG cgRNA (vfCRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNES1ZCV8UF/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (light activated caged mgRNA - 10 minute post light)",
+    "description": "ATAC-seq on HEK293 cells - 10min after light Cas9-AluGG cgRNA (vfCRISPR)",
+    "udi:sample-id": "4DNES2UW9H6A",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - 10min after light Cas9-AluGG cgRNA (vfCRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNES2UW9H6A/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (light activated caged mgRNA - no light control)",
+    "description": "ATAC-seq on HEK293 cells - no-light control Cas9-AluGG cgRNA (vfCRISPR)",
+    "udi:sample-id": "4DNESX412YIY",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - no-light control Cas9-AluGG cgRNA (vfCRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESX412YIY/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (light activated caged mgRNA - no light control)",
+    "description": "ATAC-seq on HEK293 cells - no-light control Cas9-AluGG cgRNA (vfCRISPR)",
+    "udi:sample-id": "4DNESX412YIY",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - no-light control Cas9-AluGG cgRNA (vfCRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESX412YIY/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (regular AluGG mgRNA - 3h)",
+    "description": "ATAC-seq on HEK293 cells - Cas9-AluGG mgRNA - 3 h",
+    "udi:sample-id": "4DNESPXW2DOY",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - Cas9-AluGG mgRNA - 3 h",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESPXW2DOY/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  },
+  {
+    "name": "ATAC-seq, HEK293 (photocleavable mgRNA - 2 h post light)",
+    "description": "ATAC-seq on HEK293 cells - 2h after light Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+    "udi:sample-id": "4DNESTUP8TBC",
+    "udi:cancer-type": "",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "title": "ATAC-seq on HEK293 cells - 2h after light Cas9-AluGG pcRNA (light-deactivatable CRISPR)",
+        "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESTUP8TBC/"
+      }
+    ],
+    "udi:assembly": "hg38",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [],
+        "udi:use": [
+          "atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigbed",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "conservative atac peaks"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "ATAC-seq signal fold change",
+        "path": "",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "genomic"
+            },
+            {
+              "name": "end",
+              "type": "genomic"
+            },
+            {
+              "name": "value",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": []
+        },
+        "format": "bigwig",
+        "position-fields": [
+          {
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "signal fold change"
+        ],
+        "index-file": ""
+      }
+    ]
+  }
+]

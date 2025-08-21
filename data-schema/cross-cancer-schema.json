@@ -1,0 +1,215 @@
+[
+
+[
+
+    {
+        "name": "Sample 1",
+        "description": "PCAWG Genomic data configuration for Cervix Adenocarcinoma in Chromoscope.",
+        "udi:sample-id":"b9d1a64e-d445-4174-a5b4-76dd6ea69419",
+        "udi:organism":"human",
+        "sources": [
+          {
+            "name": "PCAWG",
+            "title": "Pan-Cancer Analysis of Whole Genomes",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Cervix-AdenoCA/configs/Cervix-AdenoCA.all.config.json"
+          }
+        ],
+        "udi:assembly": "hg19",
+        "udi:cancer-type":"adenocarcinoma",
+        "udi:genes":[
+            {"name":"SMAD4", "chr":"chr18", "pos":48575080},
+            {"name":"SMAD4", "chr":"chr18", "pos":48494410},
+            {"name":"KMT2C", "chr":"chr7", "pos":151873935},
+            {"name":"FBXW7", "chr":"chr4", "pos":153245393},
+            {"name":"FBXW7", "chr":"chr4", "pos":153242410}
+        ],
+        "resources": [
+          {
+            "name": "sv",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Cervix-AdenoCA/b9d1a64e-d445-4174-a5b4-76dd6ea69419.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+            "schema": {
+              "fields": [
+                {"name":"chrom1", "type":"nominal"},
+                {"name":"start1", "type":"quantitative point"},
+                {"name":"end1", "type":"quantitative point"},
+                {"name":"chrom2", "type":"string"},
+                {"name":"start2", "type":"quantitative point"},
+                {"name":"end2", "type":"quantitative point"},
+                {"name":"sv_id", "type":"ordinal"},
+                {"name":"pe_support", "type":"quantitative"}, 
+                {"name":"strand1", "type":"nominal"},
+                {"name":"strand2svclass", "type":"nominal"},
+                {"name":"svmethod", "type":"nominal"}
+              ],
+              "primaryKey": ["chrom1", "start1", "end1", "chrom2", "start2", "end2"]
+            },
+            "format":"bedpe",
+            "position-fields": [
+              {"chromosome-field": "chrom1", "genomic-fields":["start1", "end1"]},
+              {"chromosome-field": "chrom2", "genomic-fields":["start2", "end2"]}
+            ],
+            "udi:use": [
+              "sv"
+            ],
+            "index-file": ""
+          },
+          {
+            "name": "cna",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Cervix-AdenoCA/b9d1a64e-d445-4174-a5b4-76dd6ea69419.consensus.20170119.somatic.cna.txt",
+            "schema": {
+              "fields": [
+                { "name": "chromosome", "type": "nominal"},
+                { "name": "start", "type": "quantitative" },
+                { "name": "end", "type": "quantitative" },
+                { "name": "total_cn", "type": "quantitative"},
+                { "name": "major_cn", "type": "quantitative"},
+                { "name": "minor_cn", "type": "quantitative"}
+              ],
+              "primaryKey": ["chromosome","start","end"]
+            },
+            "format": "txt",
+            "position-fields": [
+              {"chromosome-field": "chromosome", "genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "cna"
+            ],
+            "index-file": ""
+          },
+          {
+            "name": "vcf",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Cervix-AdenoCA/b9d1a64e-d445-4174-a5b4-76dd6ea69419.sorted.vcf.gz",
+            "schema": {
+              "fields": [
+                { "name": "CHROM", "type": "nominal" },
+                { "name": "POS", "type": "quantitative" },
+                { "name": "ID", "type": "quantitative" },
+                { "name": "REF", "type": "nominal" },
+                { "name": "ALT", "type": "nominal" },
+                { "name": "QUAL", "type": "nominal" },
+                { "name": "FILTER", "type": "nominal" },
+                { "name": "INFO", "type": "nominal" }
+              ],
+              "primaryKey": ["CHROM","POS","ID"]
+            },
+            "format": "vcf",
+            "position-fields": [
+              {"chromosome-field": "", "genomic-fields":[]},
+              {"chromosome-field": "", "genomic-fields":[]}
+            ],
+            "udi:use": [
+              "point-mutation",
+              "indel"
+            ],
+            "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Cervix-AdenoCA/b9d1a64e-d445-4174-a5b4-76dd6ea69419.sorted.vcf.gz.tbi"
+          }
+        ]
+      },
+
+
+
+
+
+      {
+        "name": "Sample 2",
+        "description": "DO218478 Breast In situ adenocarcinoma of 55 yo female. PCAWG Genomic data configuration for breast in-situ carcinoma in Chromoscope.",
+        "udi:organism":"human",
+        "udi:sample-id":"fc8130e0-0bfa-bba4-e040-11ac0c48328d",
+        "sources": [
+          {
+            "name": "PCAWG",
+            "title": "Pan-Cancer Analysis of Whole Genomes",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Breast-DCIS/configs/Breast-DCIS.all.config.json"
+          }
+        ],
+        "udi:assembly": "hg19",
+        "udi:cancer-type":"breast in-situ carcinoma",
+        "udi:genes":[
+            
+        ],
+        "resources": [
+          {
+            "name": "sv",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Breast-DCIS/fc8130e0-0bfa-bba4-e040-11ac0c48328d.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+            "schema": {
+              "fields": [
+                {"name":"chrom1", "type":"nominal"},
+                {"name":"start1", "type":"quantitative point"},
+                {"name":"end1", "type":"quantitative point"},
+                {"name":"chrom2", "type":"string"},
+                {"name":"start2", "type":"quantitative point"},
+                {"name":"end2", "type":"quantitative point"},
+                {"name":"sv_id", "type":"ordinal"},
+                {"name":"pe_support", "type":"quantitative"}, 
+                {"name":"strand1", "type":"nominal"},
+                {"name":"strand2svclass", "type":"nominal"},
+                {"name":"svmethod", "type":"nominal"}
+              ],
+              "primaryKey": ["chrom1", "start1", "end1", "chrom2", "start2", "end2"]
+            },
+            "format":"bedpe",
+            "position-fields": [
+              {"chromosome-field": "chrom1", "genomic-fields":["start1", "end1"]},
+              {"chromosome-field": "chrom2", "genomic-fields":["start2", "end2"]}
+            ],
+            "udi:use": [
+              "sv"
+            ],
+            "index-file": ""
+          },
+          {
+            "name": "cna",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Breast-DCIS/fc8130e0-0bfa-bba4-e040-11ac0c48328d.consensus.20170119.somatic.cna.txt",
+            "schema": {
+              "fields": [
+                { "name": "chromosome", "type": "nominal"},
+                { "name": "start", "type": "quantitative" },
+                { "name": "end", "type": "quantitative" },
+                { "name": "total_cn", "type": "quantitative"},
+                { "name": "major_cn", "type": "quantitative"},
+                { "name": "minor_cn", "type": "quantitative"}
+              ],
+              "primaryKey": ["chromosome","start","end"]
+            },
+            "format": "txt",
+            "position-fields": [
+              {"chromosome-field": "chromosome", "genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "cna"
+            ],
+            "index-file": ""
+          },
+          {
+            "name": "vcf",
+            "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Breast-DCIS/fc8130e0-0bfa-bba4-e040-11ac0c48328d.sorted.vcf.gz",
+            "schema": {
+              "fields": [
+                { "name": "CHROM", "type": "nominal" },
+                { "name": "POS", "type": "quantitative" },
+                { "name": "ID", "type": "quantitative" },
+                { "name": "REF", "type": "nominal" },
+                { "name": "ALT", "type": "nominal" },
+                { "name": "QUAL", "type": "nominal" },
+                { "name": "FILTER", "type": "nominal" },
+                { "name": "INFO", "type": "nominal" }
+              ],
+              "primaryKey": ["CHROM","POS","ID"]
+            },
+            "format": "vcf",
+            "position-fields": [
+              {"chromosome-field": "", "genomic-fields":[]},
+              {"chromosome-field": "", "genomic-fields":[]}
+            ],
+            "udi:use": [
+              "point-mutation"
+            ],
+            "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Breast-DCIS/fc8130e0-0bfa-bba4-e040-11ac0c48328d.sorted.vcf.gz.tbi"
+          }
+        ]
+      }
+]
+
+
+
+]

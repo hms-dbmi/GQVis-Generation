@@ -1,0 +1,16 @@
+[
+  {
+    "id": "484a41c8-fcaf-488d-97dc-bfe6a4b88a95",
+    "cancer": "LIHC-US",
+    "sv": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Liver-HCC/484a41c8-fcaf-488d-97dc-bfe6a4b88a95.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+    "cnv": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Liver-HCC/484a41c8-fcaf-488d-97dc-bfe6a4b88a95.consensus.20170119.somatic.cna.txt",
+    
+    "vcf": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Liver-HCC/484a41c8-fcaf-488d-97dc-bfe6a4b88a95.sorted.vcf.gz",
+    "vcf2": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Liver-HCC/484a41c8-fcaf-488d-97dc-bfe6a4b88a95.consensus.20161006.somatic.indel.sorted.vcf.gz",
+
+    "vcfIndex": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Liver-HCC/484a41c8-fcaf-488d-97dc-bfe6a4b88a95.sorted.vcf.gz.tbi",
+    "vcf2Index": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Liver-HCC/484a41c8-fcaf-488d-97dc-bfe6a4b88a95.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi",
+    "assembly": "hg19",
+    "note": "DO23023 Liver Hepatocellular carcinoma of 52 yo female"
+  }
+]

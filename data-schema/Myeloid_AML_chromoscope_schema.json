@@ -1,0 +1,4386 @@
+[
+  {
+    "name": "Myeloid AML Sample (DO49537)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49537 in Chromoscope.",
+    "udi:sample-id": "aff5793b-3197-4d1d-bf0a-9b0ded5f2937",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/aff5793b-3197-4d1d-bf0a-9b0ded5f2937.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/aff5793b-3197-4d1d-bf0a-9b0ded5f2937.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/aff5793b-3197-4d1d-bf0a-9b0ded5f2937.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/aff5793b-3197-4d1d-bf0a-9b0ded5f2937.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/aff5793b-3197-4d1d-bf0a-9b0ded5f2937.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/aff5793b-3197-4d1d-bf0a-9b0ded5f2937.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO49536)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49536 in Chromoscope.",
+    "udi:sample-id": "4ceeb025-2f16-4f80-b9b4-0151346349c6",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/4ceeb025-2f16-4f80-b9b4-0151346349c6.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/4ceeb025-2f16-4f80-b9b4-0151346349c6.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/4ceeb025-2f16-4f80-b9b4-0151346349c6.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/4ceeb025-2f16-4f80-b9b4-0151346349c6.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/4ceeb025-2f16-4f80-b9b4-0151346349c6.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/4ceeb025-2f16-4f80-b9b4-0151346349c6.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO49533)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49533 in Chromoscope.",
+    "udi:sample-id": "fa718a69-7d09-424b-90a3-4839ba7dc9b2",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/fa718a69-7d09-424b-90a3-4839ba7dc9b2.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/fa718a69-7d09-424b-90a3-4839ba7dc9b2.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/fa718a69-7d09-424b-90a3-4839ba7dc9b2.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/fa718a69-7d09-424b-90a3-4839ba7dc9b2.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/fa718a69-7d09-424b-90a3-4839ba7dc9b2.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/fa718a69-7d09-424b-90a3-4839ba7dc9b2.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO49532)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49532 in Chromoscope.",
+    "udi:sample-id": "1c300960-e51c-4477-8fdd-026c7e545dc4",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/1c300960-e51c-4477-8fdd-026c7e545dc4.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/1c300960-e51c-4477-8fdd-026c7e545dc4.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/1c300960-e51c-4477-8fdd-026c7e545dc4.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/1c300960-e51c-4477-8fdd-026c7e545dc4.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/1c300960-e51c-4477-8fdd-026c7e545dc4.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/1c300960-e51c-4477-8fdd-026c7e545dc4.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO49531)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49531 in Chromoscope.",
+    "udi:sample-id": "335c721a-3653-471f-b0ec-6144fe868c6a",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/335c721a-3653-471f-b0ec-6144fe868c6a.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/335c721a-3653-471f-b0ec-6144fe868c6a.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/335c721a-3653-471f-b0ec-6144fe868c6a.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/335c721a-3653-471f-b0ec-6144fe868c6a.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/335c721a-3653-471f-b0ec-6144fe868c6a.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/335c721a-3653-471f-b0ec-6144fe868c6a.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO49529)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49529 in Chromoscope.",
+    "udi:sample-id": "a68389d4-431f-4582-b4df-e8ad200aa3be",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/a68389d4-431f-4582-b4df-e8ad200aa3be.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/a68389d4-431f-4582-b4df-e8ad200aa3be.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/a68389d4-431f-4582-b4df-e8ad200aa3be.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/a68389d4-431f-4582-b4df-e8ad200aa3be.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/a68389d4-431f-4582-b4df-e8ad200aa3be.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/a68389d4-431f-4582-b4df-e8ad200aa3be.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO49528)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO49528 in Chromoscope.",
+    "udi:sample-id": "58e2453c-bb58-43a3-9642-705ec0e0bdbd",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/58e2453c-bb58-43a3-9642-705ec0e0bdbd.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/58e2453c-bb58-43a3-9642-705ec0e0bdbd.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/58e2453c-bb58-43a3-9642-705ec0e0bdbd.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/58e2453c-bb58-43a3-9642-705ec0e0bdbd.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/58e2453c-bb58-43a3-9642-705ec0e0bdbd.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/58e2453c-bb58-43a3-9642-705ec0e0bdbd.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO221548)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO221548 in Chromoscope.",
+    "udi:sample-id": "9f298806-77b6-4c76-bd38-3343e1a3c6f0",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/9f298806-77b6-4c76-bd38-3343e1a3c6f0.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/9f298806-77b6-4c76-bd38-3343e1a3c6f0.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/9f298806-77b6-4c76-bd38-3343e1a3c6f0.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/9f298806-77b6-4c76-bd38-3343e1a3c6f0.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/9f298806-77b6-4c76-bd38-3343e1a3c6f0.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/9f298806-77b6-4c76-bd38-3343e1a3c6f0.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52761)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52761 in Chromoscope.",
+    "udi:sample-id": "f940cea2-7e79-e422-e040-11ac0d483224",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f940cea2-7e79-e422-e040-11ac0d483224.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f940cea2-7e79-e422-e040-11ac0d483224.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f940cea2-7e79-e422-e040-11ac0d483224.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f940cea2-7e79-e422-e040-11ac0d483224.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f940cea2-7e79-e422-e040-11ac0d483224.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f940cea2-7e79-e422-e040-11ac0d483224.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52751)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52751 in Chromoscope.",
+    "udi:sample-id": "f8e61a02-92b1-947e-e040-11ac0d481b68",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-92b1-947e-e040-11ac0d481b68.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-92b1-947e-e040-11ac0d481b68.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-92b1-947e-e040-11ac0d481b68.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-92b1-947e-e040-11ac0d481b68.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-92b1-947e-e040-11ac0d481b68.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-92b1-947e-e040-11ac0d481b68.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52740)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52740 in Chromoscope.",
+    "udi:sample-id": "f90f8204-4d65-04fa-e040-11ac0c4841bb",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f90f8204-4d65-04fa-e040-11ac0c4841bb.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f90f8204-4d65-04fa-e040-11ac0c4841bb.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f90f8204-4d65-04fa-e040-11ac0c4841bb.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f90f8204-4d65-04fa-e040-11ac0c4841bb.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f90f8204-4d65-04fa-e040-11ac0c4841bb.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f90f8204-4d65-04fa-e040-11ac0c4841bb.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52732)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52732 in Chromoscope.",
+    "udi:sample-id": "f8e61a02-909d-a906-e040-11ac0d481b6e",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-909d-a906-e040-11ac0d481b6e.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-909d-a906-e040-11ac0d481b6e.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-909d-a906-e040-11ac0d481b6e.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-909d-a906-e040-11ac0d481b6e.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-909d-a906-e040-11ac0d481b6e.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-909d-a906-e040-11ac0d481b6e.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52739)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52739 in Chromoscope.",
+    "udi:sample-id": "f8f0136b-09ec-d079-e040-11ac0c4842e7",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8f0136b-09ec-d079-e040-11ac0c4842e7.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8f0136b-09ec-d079-e040-11ac0c4842e7.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8f0136b-09ec-d079-e040-11ac0c4842e7.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8f0136b-09ec-d079-e040-11ac0c4842e7.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8f0136b-09ec-d079-e040-11ac0c4842e7.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8f0136b-09ec-d079-e040-11ac0c4842e7.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52747)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52747 in Chromoscope.",
+    "udi:sample-id": "f8e61a02-8fbe-a9af-e040-11ac0d481b64",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-8fbe-a9af-e040-11ac0d481b64.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-8fbe-a9af-e040-11ac0d481b64.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-8fbe-a9af-e040-11ac0d481b64.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-8fbe-a9af-e040-11ac0d481b64.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-8fbe-a9af-e040-11ac0d481b64.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-8fbe-a9af-e040-11ac0d481b64.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52727)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52727 in Chromoscope.",
+    "udi:sample-id": "f8e61a02-90ec-96fd-e040-11ac0d481b5e",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-90ec-96fd-e040-11ac0d481b5e.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-90ec-96fd-e040-11ac0d481b5e.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-90ec-96fd-e040-11ac0d481b5e.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-90ec-96fd-e040-11ac0d481b5e.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-90ec-96fd-e040-11ac0d481b5e.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-90ec-96fd-e040-11ac0d481b5e.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  },
+  {
+    "name": "Myeloid AML Sample (DO52735)",
+    "description": "PCAWG Genomic data configuration for Myeloid Acute Myeloid Leukemia sample DO52735 in Chromoscope.",
+    "udi:sample-id": "f8e61a02-654c-c226-e040-11ac0d481b60",
+    "udi:organism": "human",
+    "sources": [
+      {
+        "name": "PCAWG",
+        "title": "Pan-Cancer Analysis of Whole Genomes",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/configs/Myeloid-AML.all.config.json"
+      }
+    ],
+    "udi:assembly": "hg19",
+    "udi:cancer-type": "acute myeloid leukemia",
+    "udi:genes": [],
+    "resources": [
+      {
+        "name": "sv",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-654c-c226-e040-11ac0d481b60.pcawg_consensus_1.6.161116.somatic.sv.bedpe",
+        "schema": {
+          "fields": [
+            {
+              "name": "chrom1",
+              "type": "nominal"
+            },
+            {
+              "name": "start1",
+              "type": "quantitative"
+            },
+            {
+              "name": "end1",
+              "type": "quantitative"
+            },
+            {
+              "name": "chrom2",
+              "type": "string"
+            },
+            {
+              "name": "start2",
+              "type": "quantitative"
+            },
+            {
+              "name": "end2",
+              "type": "quantitative"
+            },
+            {
+              "name": "sv_id",
+              "type": "ordinal"
+            },
+            {
+              "name": "pe_support",
+              "type": "quantitative"
+            },
+            {
+              "name": "strand1",
+              "type": "nominal"
+            },
+            {
+              "name": "strand2svclass",
+              "type": "nominal"
+            },
+            {
+              "name": "svmethod",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "chrom1",
+            "start1",
+            "end1",
+            "chrom2",
+            "start2",
+            "end2"
+          ]
+        },
+        "format": "bedpe",
+        "position-fields": [
+          {
+            "chromosome-field": "chrom1",
+            "genomic-fields": [
+              "start1",
+              "end1"
+            ]
+          },
+          {
+            "chromosome-field": "chrom2",
+            "genomic-fields": [
+              "start2",
+              "end2"
+            ]
+          }
+        ],
+        "udi:use": [
+          "sv",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "cna",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-654c-c226-e040-11ac0d481b60.consensus.20170119.somatic.cna.txt",
+        "schema": {
+          "fields": [
+            {
+              "name": "chromosome",
+              "type": "nominal"
+            },
+            {
+              "name": "start",
+              "type": "quantitative"
+            },
+            {
+              "name": "end",
+              "type": "quantitative"
+            },
+            {
+              "name": "total_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "major_cn",
+              "type": "quantitative"
+            },
+            {
+              "name": "minor_cn",
+              "type": "quantitative"
+            }
+          ],
+          "primaryKey": [
+            "chromosome",
+            "start",
+            "end"
+          ]
+        },
+        "format": "txt",
+        "position-fields": [
+          {
+            "chromosome-field": "chromosome",
+            "genomic-fields": [
+              "start",
+              "end"
+            ]
+          }
+        ],
+        "udi:use": [
+          "cna",
+          "chromoscope"
+        ],
+        "index-file": ""
+      },
+      {
+        "name": "vcf",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-654c-c226-e040-11ac0d481b60.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "point-mutation",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-654c-c226-e040-11ac0d481b60.sorted.vcf.gz.tbi"
+      },
+      {
+        "name": "vcf2",
+        "path": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-654c-c226-e040-11ac0d481b60.consensus.20161006.somatic.indel.sorted.vcf.gz",
+        "schema": {
+          "fields": [
+            {
+              "name": "CHROM",
+              "type": "nominal"
+            },
+            {
+              "name": "POS",
+              "type": "quantitative point"
+            },
+            {
+              "name": "ID",
+              "type": "quantitative"
+            },
+            {
+              "name": "REF",
+              "type": "nominal"
+            },
+            {
+              "name": "ALT",
+              "type": "nominal"
+            },
+            {
+              "name": "QUAL",
+              "type": "nominal"
+            },
+            {
+              "name": "FILTER",
+              "type": "nominal"
+            },
+            {
+              "name": "INFO",
+              "type": "nominal"
+            }
+          ],
+          "primaryKey": [
+            "CHROM",
+            "POS",
+            "ID"
+          ]
+        },
+        "format": "vcf",
+        "position-fields": [
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          },
+          {
+            "chromosome-field": "",
+            "genomic-fields": []
+          }
+        ],
+        "udi:use": [
+          "indels",
+          "chromoscope"
+        ],
+        "index-file": "https://somatic-browser-test.s3.amazonaws.com/PCAWG/Myeloid-AML/f8e61a02-654c-c226-e040-11ac0d481b60.consensus.20161006.somatic.indel.sorted.vcf.gz.tbi"
+      }
+    ]
+  }
+]

@@ -6,7 +6,7 @@ from typing import Dict, Optional, Tuple
 import pandas as pd
 import os
 from langchain.chat_models import init_chat_model
-from langchain_openai import OpenAI
+from langchain_openai import ChatOpenAI
 from langchain_core.prompts import PromptTemplate
 from pydantic import BaseModel, Field
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 from rich import print
 load_dotenv()
 
-CACHE_FILE = "./datasets/paraphrase_cache.pkl"
+CACHE_FILE = "paraphrase_cache.pkl"
 
 def load_schema(schema_files):
     schema_list = []
@@ -190,7 +190,8 @@ The sentence will either be a question about genomics data, or request to constr
 
 The input sentence will include entity, sample, and location from the data.
 The dataset schema will also be provided to you to enable better paraphrasing these names.
-More technical language may use the exact field names, while more colloquial language may use more general terms, synonyms, and will likely not use the exact field names. All questions should be answered by a genomics data visualization in 2D.
+More technical language may use the exact field names, all questions should be answered by a genomics data visualization in 2D. 
+Common abbreviations to fill out include sv for structural variants, cna for copy number alternations, cnv for copy number variants.
 
 E.g, Where do structural variants (SVs) fall in relation to the FBXW7 gene?
 
@@ -211,10 +212,11 @@ Output:
 
 def init_llm():
 
-    llm = OpenAI(
+    llm = ChatOpenAI(
         api_key = os.environ.get("OPENAI_API_KEY"),
         organization=os.environ.get("OPENAI_ORG_ID"),
-        model="gpt-4o"
+        model="gpt-4o",
+        temperature=0.7,
         #model_kwargs= {"project": os.environ.get("OPENAI_PROJECT_ID")}
     )
 
@@ -250,7 +252,7 @@ def paraphrase_query(cache_lock, llm, key, query: str, dataset_schema: str, cach
             "dim2_5": "Technical"
         })
         try:
-            output_str = str(output)
+            output_str = output.content
             for line in output_str.split("\n"):
                 match = re.match(r"Score-A\s*(\d),\s*Score-B\s*(\d):\s*(.+)", line.strip())
                 if match:
@@ -285,14 +287,14 @@ def paraphrase_query(cache_lock, llm, key, query: str, dataset_schema: str, cach
 
 
 if __name__ == "__main__":
-    schema_files = ["all-schema.json"]  
+    schema_files = ["data-schema/all-schema.json"]  
     schema_list = load_schema(schema_files)
     for i, schema in enumerate(schema_list):
         if not isinstance(schema, dict):
             raise ValueError(f"Schema at index {i} is not a dictionary: {type(schema)}")
 
-    df = pd.read_csv("test.csv")  
+    df = pd.read_csv("final__single_question.csv")  
     result_df = paraphrase(df, schema_list, only_cached=False)
 
-    result_df.to_csv("testresult.csv", index=False)
+    result_df.to_csv("GQVis_paraphraser_result.csv", index=False)
     print(result_df.head())

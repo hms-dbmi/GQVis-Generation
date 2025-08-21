@@ -1,0 +1,334 @@
+[
+    [
+  
+      {
+          "name": "WTC-11 differentiated to cardiac muscle cell - HiC",
+          "description": "in situ Hi-C on compound heterozygous Crispr modified TBX5 LOF with 1 bp insertion causing frameshift and 8 bp deletion in WTC-11 iPSC cells differentiated for 20 days to atrial cardiac myocytes.",
+          "udi:sample-id":"4DNESW7WYVHO",
+          "udi:cancer-type":"",
+          "udi:organism":"human",
+          "sources": [
+            {
+              "title": "Hi-C on WTC-11 differentiated to cardiac muscle cell",
+              "path": "https://data.4dnucleome.org/higlass-view-configs/1d604a2e-8ea9-4962-a565-42e900b79832/"
+            }
+          ],
+          "udi:assembly": "hg19",
+          "udi:genes":[
+              {"name":"UBIAD1", "chr":"chr1", "pos":11273206},
+              {"name":"ITPR", "chr":"chr3", "pos":4493345},
+              {"name":"SPZ1", "chr":"chr5", "pos":80319625},
+              {"name":"SHLD2", "chr":"chr10", "pos":87094161},
+              {"name":"WRAP53", "chr":"chr17", "pos":7686071},
+              {"name":"ARMCX3", "chr":"chrX", "pos":101622797},
+              {"name":"TAAR3P", "chr":"chr6", "pos":1326803225},
+              {"name":"LNCARSR", "chr":"chr9", "pos":79505804}
+          ],
+          "resources": [
+            {
+                "name": "beddb",
+                "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=Svq0LF9NRim8UwNmeueMrg",
+                "schema": {
+                  "fields": [
+                    {"name":"start", "type":"genomic"},
+                    {"name":"end", "type": "genomic"}
+                    ],
+                  "primaryKey": []
+                },
+                "format": "beddb",
+                "position-fields": [
+                  {"genomic-fields":["start", "end"]}
+                ],
+                "udi:use": [
+                  "boundary"
+                ],
+                "index-file":""
+            },
+  
+            {
+              "name": "mcool",
+              "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=9f9b830c-c284-4d77-b747-2e6598aa3262",
+              "schema": {
+                "fields": [
+                    {"name":"xs", "type":"genomic"},
+                    {"name":"xe", "type":"genomic"},
+                    {"name":"ys", "type":"genomic"},
+                    {"name":"value", "type":"quantitative"}
+                ],
+                "primaryKey": []
+              },
+              "format": "mcool",
+              "position-fields": [],
+              "udi:use": [
+                "contact"
+              ],
+              "index-file":""
+            }
+        ] 
+  
+      }
+    ],
+  
+  
+  
+    [
+      
+  
+  
+      {
+        "name": "ChIP-seq dtag clone A2",
+        "description": "RAD21 ChIP-seq on 24 hr dTAG treated dTAG-NIPBL clone A2",
+        "udi:sample-id":"4DNESX2VM56U",
+        "udi:cancer-type":"",
+        "udi:organism":"human",
+        "sources": [
+          {
+            "title": "RAD21 ChIP-seq on 24 hr dTAG treated dTAG-NIPBL clone A2",
+            "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESX2VM56U/"
+          }
+        ],
+        "udi:assembly": "hg38",
+        "udi:genes":[
+            {"name":"UBIAD1", "chr":"chr1", "pos":11273206},
+            {"name":"ITPR", "chr":"chr3", "pos":4493345},
+            {"name":"SPZ1", "chr":"chr5", "pos":80319625},
+            {"name":"SHLD2", "chr":"chr10", "pos":87094161},
+            {"name":"WRAP53", "chr":"chr17", "pos":7686071},
+            {"name":"ARMCX3", "chr":"chrX", "pos":101622797},
+            {"name":"TAAR3P", "chr":"chr6", "pos":1326803225},
+            {"name":"LNCARSR", "chr":"chr9", "pos":79505804}
+        ],
+        "resources": [
+          {
+              "name": "Peak calls from ENCODE ChIP-Seq Pipeline",
+              "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=8937e6a4-2fbe-4d02-9aef-3414ea9f894c",
+              "schema": {
+                "fields": [
+                  {"name":"start", "type":"genomic"},
+                  {"name":"end", "type": "genomic"}
+                  ],
+                "primaryKey": []
+              },
+              "format": "bigbed",
+              "position-fields": [
+                {"genomic-fields":["start", "end"]}
+              ],
+              "udi:use": [
+                "peaks"
+              ],
+              "index-file":""
+          },
+          {
+            "name": "Conservative peak calls from ENCODE ChIP-Seq Pipeline",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=d99e505c-dbf6-449a-befc-9feafc3c11ca",
+            "schema": {
+              "fields": [
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"}
+                ],
+              "primaryKey": []
+            },
+            "format": "bigbed",
+            "position-fields": [
+              {"genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "conservative peaks"
+            ],
+            "index-file":""
+          },
+          {
+            "name": "ChIP-seq signal fold change over input control",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=ab3b4858-1861-4805-8cec-3ccc9edb6e0a",
+            "schema": {
+              "fields": [
+                {"name":"chromosome", "type": "nominal"},
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"},
+                {"name":"value", "type": "quantitative"}
+                ],
+              "primaryKey": []
+            },
+            "format": "bigwig",
+            "position-fields": [
+              {"genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "signal change"
+            ],
+            "index-file":""
+          }
+          
+        ] 
+  
+      }
+  
+
+  
+  
+    ],
+  
+  
+    [
+      {
+        "name": "RNA-seq, RUES2 iPSC",
+        "description": "RNA-seq on RUES2 iPSC cells - differentiation day 14 endothelial cells",
+        "udi:sample-id":"4DNESLQDCU1A",
+        "udi:cancer-type":"",
+        "udi:organism":"human",
+        "sources": [
+          {
+            "title": "RNA-seq on RUES2 iPSC cells - differentiation day 14 endothelial cells",
+            "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNESLQDCU1A/"
+          }
+        ],
+        "udi:assembly": "hg38",
+        "udi:genes":[
+            {"name":"UBIAD1", "chr":"chr1", "pos":11273206},
+            {"name":"ITPR", "chr":"chr3", "pos":4493345}
+        ],
+        "resources": [
+          {
+            "name": "read counts, plus",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=dc986015-af15-4cfb-9369-e8263a8a5ab0",
+            "schema": {
+              "fields": [
+                {"name":"chromosome", "type": "nominal"},
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"},
+                {"name":"value", "type": "quantitative"}
+              ],
+              "primaryKey": []
+            },
+            "format": "bigwig",
+            "position-fields": [],
+            "udi:use": [
+              "gene expression"
+            ],
+            "index-file":""
+          },
+          {
+            "name": "read counts, minus",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=fe67ace1-25cd-4e5c-9ded-de977bb471cd",
+            "schema": {
+              "fields": [
+                {"name":"chromosome", "type": "nominal"},
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"},
+                {"name":"value", "type": "quantitative"}
+                ],
+              "primaryKey": []
+            },
+            "format": "bigwig",
+            "position-fields": [
+              {"genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "gene expression"
+            ],
+            "index-file":""
+          }
+          
+        ] 
+  
+      }
+  
+  
+  
+  
+    ],
+  
+  
+  
+    [
+      {
+        "name": "ATAC-seq, hTERT-RPE-1",
+        "description": "Bulk ATAC-seq in human hTERT-RPE-1 cell line with modification via - F6 clone with mutation at position -69 (G>A) upstream and -71 (C>T) upstream from the start codon of TMEM16 gene",
+        "udi:sample-id":"4DNES7YK6HTM",
+        "udi:cancer-type":"",
+        "udi:organism":"human",
+        "sources": [
+          {
+            "title": "Bulk ATAC-seq in human hTERT-RPE-1 cell line with modification via - F6 clone with mutation at position -69 (G>A) upstream and -71 (C>T) upstream from the start codon of TMEM16 gene",
+            "path": "https://data.4dnucleome.org/experiment-set-replicates/4DNES7YK6HTM/"
+          }
+        ],
+        "udi:assembly": "hg38",
+        "udi:genes":[
+            {"name":"UBIAD1", "chr":"chr1", "pos":11273206},
+            {"name":"ITPR", "chr":"chr3", "pos":4493345}
+        ],
+        "resources": [
+          {
+            "name": "Peak calls from ENCODE ATAC-Seq Pipeline",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=1aa2ee2f-c081-4fa0-a7a4-94336298dc08",
+            "schema": {
+              "fields": [
+                {"name":"chromosome", "type": "nominal"},
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"},
+                {"name":"value", "type": "quantitative"}
+              ],
+              "primaryKey": []
+            },
+            "format": "bigbed",
+            "position-fields": [],
+            "udi:use": [
+              "atac peaks"
+            ],
+            "index-file":""
+          },
+          {
+            "name": "Conservative peak calls from ENCODE ATAC-Seq Pipeline",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=4882eb86-f9d4-4a0d-aebc-ec6e84df7ffa",
+            "schema": {
+              "fields": [
+                {"name":"chromosome", "type": "nominal"},
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"},
+                {"name":"value", "type": "quantitative"}
+                ],
+              "primaryKey": []
+            },
+            "format": "bigbed",
+            "position-fields": [
+              {"genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "conservative atac peaks"
+            ],
+            "index-file":""
+          },
+          {
+            "name": "ATAC-seq signal fold change",
+            "path": "https://higlass.4dnucleome.org/api/v1/tileset_info/?d=afa16fdb-000c-4241-92cb-b7779a238f04",
+            "schema": {
+              "fields": [
+                {"name":"chromosome", "type": "nominal"},
+                {"name":"start", "type":"genomic"},
+                {"name":"end", "type": "genomic"},
+                {"name":"value", "type": "quantitative"}
+                ],
+              "primaryKey": []
+            },
+            "format": "bigwig",
+            "position-fields": [
+              {"genomic-fields":["start", "end"]}
+            ],
+            "udi:use": [
+              "signal fold change"
+            ],
+            "index-file":""
+          }
+          
+        ] 
+  
+      }
+  
+  
+  
+  
+  
+    ]
+  
+  ]
