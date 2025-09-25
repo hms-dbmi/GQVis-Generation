@@ -9,7 +9,7 @@ The code generates a collection of natural language **Q**ueries on genomics **D*
 ---
 ## 🚀 Overview
 
-![Overview figure of data generation pipline](pipeline.png)
+![Overview figure of data generation pipline](gqvis-pipeline.png)
 
 1. **Template Generation** will create abstract questions and specifications with placeholders for sample, entities, and location as well as constraints for those sample and entities.
 2. **Data-schema/All-schema** are our defined dataset schemas retrieved from 4DN, ENCODE, and Chromoscope. 
