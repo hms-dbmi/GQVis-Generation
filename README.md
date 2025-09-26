@@ -25,9 +25,13 @@ The code generates a collection of natural language **Q**ueries on genomics **D*
 ```
 .
 ├── datasets/        # Source structured data files
-├── main.py          # Entry point for dataset generation
-├── template_generation.py             # Generated datasets (optional exports)
-├── out/             # Generated datasets (optional exports)
+├── ideogram_data/   # Ideograma data for template expansion
+├── location_data/   # Retrieve location for genomic intervals
+├── misc/            # Helper code for our paper 
+├── multi-step/      # Contains code for multi-step generation and linking
+├── paraphraser.py   # LLM code to paraphrase questions
+├── template_expansion.py   # Code to reify template questions
+├── template_generation.py  # Code to create abstract questions and Gosling specifications
 └── README.md        # This file
 ```
 
